@@ -1,7 +1,6 @@
 package com.smola;
 
 import com.smola.model.Person;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -26,20 +25,46 @@ public class MyListImplTest {
         assertEquals(0, myList.size());
     }
 
-//    @Test
-//    void referencesShouldBeNulled_whenListWasCleaned() {
-//        Person person = new Person("Marcin");
-//        myList.add(person);
-//        myList.clear();
-//        myList.forEach(Assertions::assertNull);
-//    }
+    @Test
+    void referencesShouldBeNulled_whenListWasCleaned() {
+        Person person = new Person("Marcin");
+        myList.add(person);
+        myList.clear();
+        myList.forEach(Assertions::assertNull);
+    }
 
 
     @Test
     void shouldIncreaseArraySize_whenAddedMultipleElements() {
-        for (int i = 0; i < 32; i++) {
+        for (int i = 0; i < 1000; i++) {
             myList.add(new Person(String.valueOf(i)));
         }
-        assertEquals(32,myList.size());
+        assertEquals(1000,myList.size());
+    }
+
+    @Test
+    void shouldReturnTrue_whenListContainsObject() {
+        Person person = new Person("Marcin");
+        myList.add(person);
+        assertTrue(myList.contains(person));
+    }
+
+    @Test
+    void shouldReturnFalse_whenListDoesNotContainsObject() {
+        Person person = new Person("Marcin");
+        myList.add(person);
+        assertFalse(myList.contains(new Person("asdasdasd")));
+    }
+
+    @Test
+    void shouldRemoveElementFromList() {
+        Person person = new Person("Marcin");
+        Person person2 = new Person("Artem");
+        myList.add(person);
+        myList.add(person2);
+        boolean actual = myList.remove(person);
+        assertTrue(actual);
+        assertEquals(1,myList.size());
+        assertFalse(myList.contains(person));
     }
 }
