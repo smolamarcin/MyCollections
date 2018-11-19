@@ -10,7 +10,7 @@ public class MyListImplTest {
     private MyListImpl<Person> myList = new MyListImpl<>();
 
     @Test
-    void shouldReturnTrue_whenAddedElementToList() {
+    public void shouldReturnTrue_whenAddedElementToList() {
         Person person = new Person("Marcin");
         boolean added = myList.add(person);
         assertTrue(added);
@@ -67,4 +67,18 @@ public class MyListImplTest {
         assertEquals(1,myList.size());
         assertFalse(myList.contains(person));
     }
+
+//    @Test
+//    void name() {
+//        for (int i = 0; i < 1000; i++) {
+//            myList.add(new Person(String.valueOf(i)));
+//        }
+//        for (int i = 0; i < 300; i++) {
+//            myList.remove(new Person(String.valueOf(i)));
+//        }
+//        assertEquals(700,myList.size());
+//        for (int i = 0; i < 300; i++) {
+//            assertFalse(myList.contains(new Person(String.valueOf(i))));
+//        }
+//    }
 }
