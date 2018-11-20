@@ -3,6 +3,7 @@ package com.smola.linked;
 import com.smola.MarcinList;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class MarcinLinkedListImpl<E> implements MarcinList<E> {
     private int size;
@@ -11,24 +12,37 @@ public class MarcinLinkedListImpl<E> implements MarcinList<E> {
 
     @Override
     public E remove(int index) {
+        E e = get(index);
+        if (remove(e)) {
+            return e;
+        }
         return null;
     }
 
     @Override
     public E get(int index) {
-        return null;
+        Iterator<E> iterator = this.iterator();
+        int currentIndex = 0;
+        E next = null;
+        while (iterator.hasNext()) {
+            next = iterator.next();
+            if (currentIndex == index) {
+                break;
+            }
+            currentIndex++;
+        }
+        return next;
     }
 
     @Override
     public int indexOf(E e) {
         int index = 0;
-        Node node = head;
-        while (node != null) {
-            if (node.value.equals(e)) {
+        Iterator<E> iterator = this.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next().equals(e)) {
                 return index;
             }
             index++;
-            node = node.next;
         }
         throw new RuntimeException("Index does not exist.");
     }
@@ -46,7 +60,7 @@ public class MarcinLinkedListImpl<E> implements MarcinList<E> {
     @Override
     public boolean add(E e) {
         Node node = new Node(e);
-        if (head == null) {
+        if (isEmpty()) {
             this.head = node;
             this.tail = node;
         } else {
@@ -61,7 +75,7 @@ public class MarcinLinkedListImpl<E> implements MarcinList<E> {
     public boolean remove(E e) {
         boolean result = false;
         Node currentNode = head;
-        if(checkHead(currentNode,e)){
+        if (checkHead(currentNode, e)) {
             result = true;
         }
         while (head != null && currentNode.next.hasNext()) {
@@ -76,17 +90,15 @@ public class MarcinLinkedListImpl<E> implements MarcinList<E> {
         return result;
     }
 
-    private boolean checkHead(Node head,E e) {
+    private boolean checkHead(Node head, E e) {
         boolean result = false;
-        if (size > 0 &&head.value.equals(e)){
+        if (size > 0 && head.value.equals(e)) {
             this.head = this.head.next;
             size--;
             result = true;
         }
-        if (size == 1){
-            this.head = null;
-            size--;
-            result = true;
+        if (size == 1 && head.value.equals(e)) {
+            clear();
         }
         return result;
     }
@@ -111,18 +123,49 @@ public class MarcinLinkedListImpl<E> implements MarcinList<E> {
 
     @Override
     public void clear() {
-
+        Node currentNode = this.head.next;
+        while (currentNode != null) {
+            size--;
+            currentNode = currentNode.next;
+        }
+        this.head = null;
+        this.tail = null;
+        size--;
     }
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new Iterator<E>() {
+            Node current = head;
+
+            @Override
+            public boolean hasNext() {
+                return current != null;
+            }
+
+            @Override
+            public E next() {
+                if (current == null) {
+                    throw new NoSuchElementException();
+                }
+                Node res = current;
+                current = current.next;
+                return res.value;
+            }
+        };
     }
 
 
     public E getHead() {
         if (head != null) {
             return head.value;
+        }
+        return null;
+    }
+
+    public E getTail() {
+        if (tail != null) {
+            return tail.value;
         }
         return null;
     }

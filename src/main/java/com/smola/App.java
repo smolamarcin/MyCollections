@@ -1,14 +1,14 @@
 package com.smola;
 
+import com.smola.array.MarcinArrayListImpl;
 import com.smola.model.Person;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class App {
     public static void main(String[] args) {
-        List<Person> people = new ArrayList<>();
+        MarcinList<Person> people = new MarcinArrayListImpl<>();
         people.add(new Person("Marcin"));
         people.add(new Person("Artem"));
         people.add(new Person("Mateusz"));
@@ -22,7 +22,7 @@ public class App {
         printList(people);
     }
 
-    private static void printList(List<Person> list) {
+    private static void printList(MarcinList<Person> list) {
         list.forEach(System.out::println);
     }
 }

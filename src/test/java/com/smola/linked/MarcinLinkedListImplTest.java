@@ -1,6 +1,7 @@
 package com.smola.linked;
 
 import com.smola.model.Person;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -103,5 +104,53 @@ class MarcinLinkedListImplTest {
         assertEquals(2,marcinLinkedList.size());
         assertEquals(0,marcinLinkedList.indexOf(secondPerson));
         assertEquals(1,marcinLinkedList.indexOf(thirdPerson));
+    }
+
+    @Test
+    void shouldCleanList() {
+        Person firstPerson = new Person("A");
+        Person secondPerson = new Person("B");
+        Person thirdPerson = new Person("C");
+        marcinLinkedList.add(firstPerson);
+        marcinLinkedList.add(secondPerson);
+        marcinLinkedList.add(thirdPerson);
+
+        marcinLinkedList.clear();
+
+        assertEquals(0,marcinLinkedList.size());
+        assertNull(marcinLinkedList.getHead());
+        assertNull(marcinLinkedList.getTail());
+
+        marcinLinkedList.forEach(Assertions::assertNull);
+    }
+
+    @Test
+    void shouldReturnObjectOnSpecificIndex() {
+        Person firstPerson = new Person("A");
+        Person secondPerson = new Person("B");
+        Person thirdPerson = new Person("C");
+        marcinLinkedList.add(firstPerson);
+        marcinLinkedList.add(secondPerson);
+        marcinLinkedList.add(thirdPerson);
+
+
+        Person found = marcinLinkedList.get(1);
+        assertEquals(secondPerson,found);
+    }
+
+    @Test
+    void shouldRemoveObjectOnSPecificIndex() {
+        Person firstPerson = new Person("A");
+        Person secondPerson = new Person("B");
+        Person thirdPerson = new Person("C");
+        marcinLinkedList.add(firstPerson);
+        marcinLinkedList.add(secondPerson);
+        marcinLinkedList.add(thirdPerson);
+
+        marcinLinkedList.remove(1);
+
+        assertEquals(2,marcinLinkedList.size());
+        assertEquals(firstPerson,marcinLinkedList.get(0));
+        assertEquals(thirdPerson,marcinLinkedList.get(1));
     }
 }
