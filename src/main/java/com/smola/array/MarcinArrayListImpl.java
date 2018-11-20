@@ -28,14 +28,19 @@ public class MarcinArrayListImpl<E> implements MarcinList<E> {
         if (actualListSize < array.length){
             array[actualListSize] = e;
         }else {
-            Object[] tempArray = new Object[actualListSize * 2];
-            for (int i = 0; i < array.length; i++) {
-                tempArray[i] = array[i];
-            }
-            this.array = tempArray;
+            resizeArray(this.array);
+            array[actualListSize] = e;
         }
         actualListSize++;
         return true;
+    }
+
+    private void resizeArray(Object[] array) {
+        Object[] tempArray = new Object[actualListSize * 2];
+        for (int i = 0; i < array.length; i++) {
+            tempArray[i] = array[i];
+        }
+        this.array = tempArray;
     }
 
     @Override
@@ -52,7 +57,7 @@ public class MarcinArrayListImpl<E> implements MarcinList<E> {
         for (int i = 0; i < actualListSize; i++) {
             if (this.array[i].equals(toRemove)){
                 result = true;
-                for (int j = i; j < actualListSize; j++) {
+                for (int j = i; j <= actualListSize; j++) {
                     this.array[j] = this.array[j+1];
                 }
                 actualListSize--;

@@ -80,15 +80,6 @@ public class MyListImplTest {
         assertFalse(myList.contains(person));
     }
 
-//    @Test
-//    void shouldRemoveMultipleElementsFromList() {
-//        addMultipleElementsToList(myList,70);
-//        for (int i = 0; i < 30; i++) {
-//            myList.remove(new Person(String.valueOf(i)));
-//        }
-    //TODO: NPE :(
-//    }
-
 
     @Test
     void shouldRemoveElementOnSpecificIndex() {
