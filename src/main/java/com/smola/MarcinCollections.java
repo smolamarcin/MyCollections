@@ -1,6 +1,6 @@
 package com.smola;
 
-public interface MyCollections<E> {
+public interface MarcinCollections<E> {
     int size();
     boolean isEmpty();
     boolean add(E e);

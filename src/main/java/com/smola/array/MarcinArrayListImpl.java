@@ -1,11 +1,18 @@
-package com.smola;
+package com.smola.array;
+
+import com.smola.MarcinList;
 
 import java.util.Iterator;
 
-public class MyListImpl<E> implements MyList<E> {
-    public static final int INIT_ARRAY_LENGTH = 16;
-    private Object[] array = new Object[INIT_ARRAY_LENGTH];
+public class MarcinArrayListImpl<E> implements MarcinList<E> {
+    private static final int INIT_CAPACITY = 16;
+    private Object[] array;
     private int actualListSize = 0;
+
+    public MarcinArrayListImpl() {
+        this.array = new Object[INIT_CAPACITY];
+    }
+
     @Override
     public int size() {
         return actualListSize;
@@ -43,12 +50,12 @@ public class MyListImpl<E> implements MyList<E> {
     public boolean remove(E toRemove) {
         boolean result = false;
         for (int i = 0; i < actualListSize; i++) {
-            if (array[i].equals(toRemove)){
+            if (this.array[i].equals(toRemove)){
                 result = true;
-                actualListSize--;
                 for (int j = i; j < actualListSize; j++) {
-                    array[j] = array[j+1];
+                    this.array[j] = this.array[j+1];
                 }
+                actualListSize--;
                 break;
             }
         }
@@ -57,12 +64,13 @@ public class MyListImpl<E> implements MyList<E> {
 
     @Override
     public boolean contains(E e) {
+        boolean result = false;
         for (int i = 0; i < actualListSize; i++) {
             if (array[i].equals(e)){
-                return true;
+                result =  true;
             }
         }
-        return false;
+        return result;
     }
 
     @Override
@@ -82,5 +90,30 @@ public class MyListImpl<E> implements MyList<E> {
                 return e;
             }
         };
+    }
+
+    @Override
+    public E remove(int index) {
+        Object toRemove = this.array[index];
+        for (int i = index; i < actualListSize; i++) {
+            array[i] = array[i +1];
+        }
+        actualListSize--;
+        return (E) toRemove;
+    }
+
+    @Override
+    public E get(int index) {
+        return (E) this.array[index];
+    }
+
+    @Override
+    public int indexOf(E e) {
+        for (int i = 0; i < actualListSize; i++) {
+            if (e.equals(this.array[i])){
+                return i;
+            }
+        }
+        throw new RuntimeException("Index does not exist.");
     }
 }
