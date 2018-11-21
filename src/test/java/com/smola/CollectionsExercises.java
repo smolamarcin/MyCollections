@@ -4,6 +4,7 @@ import com.smola.model.Person;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CollectionsExercises {
     @Test
@@ -67,18 +68,28 @@ public class CollectionsExercises {
         set.add("B");
         set.add("C");
         set.add("D");
-        set.add("A");
+        set.add("Aaa");
+        set.add("Abb");
+        set.add("Acc");
+        set.add("Accd");
         set.add("E");
         set.add("F");
         set.add("FF");
         set.add("G");
         set.remove("B");
-        Iterator<String> iterator = set.iterator();
         set.removeIf(e->e.length() == 2);
         set.add("G");
         SortedSet<String> strings = set.subSet("B",true, "G",true);
         set.add("G");
 
+        // greatest elements on string longer than 2
+        List<Integer> siema = new ArrayList<>();
+        List<String> S = new ArrayList<>();
+        S.stream().filter(e->
+            e.charAt(0) == 'a').filter(e->e.length() == 3).collect(Collectors.toList());
+        double v = siema.stream().mapToInt(e -> e.intValue()).average().orElse(-1);
+        String s = set.stream().filter(e -> e.length() > 2).max(String::compareTo).get();
     }
+
 }
 
