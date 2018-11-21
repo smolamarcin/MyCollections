@@ -2,6 +2,8 @@ package com.smola.array;
 
 import com.smola.MarcinList;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 
 public class MarcinArrayListImpl<E> implements MarcinList<E> {

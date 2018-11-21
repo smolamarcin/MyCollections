@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MarcinLinkedListImplTest {
-    private MarcinLinkedListImpl<Person> marcinLinkedList;
+    private MarcinLinkedListImpl<String> marcinLinkedList;
     @BeforeEach
     void setUp() {
         marcinLinkedList = new MarcinLinkedListImpl();
@@ -16,48 +16,48 @@ class MarcinLinkedListImplTest {
 
     @Test
     void shouldIncreaseSizeWhenAddedNewElement() {
-        marcinLinkedList.add(new Person("A"));
+        marcinLinkedList.add("A");
         assertEquals(1,marcinLinkedList.size());
     }
 
     @Test
     void firstAddedElement_shouldBeHead() {
-        marcinLinkedList.add(new Person("A"));
-        Person head = marcinLinkedList.getHead();
-        assertEquals("A",head.getName());
+        marcinLinkedList.add("A");
+        String head = marcinLinkedList.getHead();
+        assertEquals("A",head);
     }
 
     @Test
     void shouldLinkAddedElements() {
-        Person firstPerson = new Person("A");
-        marcinLinkedList.add(firstPerson);
-        Person secondPerson = new Person("B");
-        marcinLinkedList.add(secondPerson);
+        String first = "A";
+        marcinLinkedList.add(first);
+        String second = "B";
+        marcinLinkedList.add(second);
 
-        Person head = marcinLinkedList.getHead();
-        assertEquals(firstPerson,head);
-        assertTrue(marcinLinkedList.contains(secondPerson));
+        String head = marcinLinkedList.getHead();
+        assertEquals(first,head);
+        assertTrue(marcinLinkedList.contains(second));
         assertEquals(2,marcinLinkedList.size());
     }
 
     @Test
     void shouldReturnIndexOfElement() {
-        Person firstPerson = new Person("A");
-        marcinLinkedList.add(firstPerson);
-        Person secondPerson = new Person("B");
-        marcinLinkedList.add(secondPerson);
+        String first = "A";
+        marcinLinkedList.add(first);
+        String second = "B";
+        marcinLinkedList.add(second);
 
-        int index = marcinLinkedList.indexOf(secondPerson);
+        int index = marcinLinkedList.indexOf(second);
         assertEquals(1,index);
     }
 
     @Test
     void shouldThrowException_whenNoDemanIndex() {
-        Person firstPerson = new Person("A");
-        marcinLinkedList.add(firstPerson);
+        String first = "A";
+        marcinLinkedList.add(first);
 
         RuntimeException expectedException = assertThrows(RuntimeException.class, () -> {
-            marcinLinkedList.indexOf(new Person("Xasdasdsd"));
+            marcinLinkedList.indexOf("sadad");
         });
 
         assertEquals("Index does not exist.",expectedException.getMessage());
@@ -65,10 +65,9 @@ class MarcinLinkedListImplTest {
 
     @Test
     void shouldRemoveHead_whenOneElementInList() {
-        Person firstPerson = new Person("A");
-        marcinLinkedList.add(firstPerson);
-
-        marcinLinkedList.remove(firstPerson);
+        String first = "A";
+        marcinLinkedList.add(first);
+        marcinLinkedList.remove(first);
 
         assertEquals(0,marcinLinkedList.size());
         assertNull(marcinLinkedList.getHead());
@@ -76,44 +75,42 @@ class MarcinLinkedListImplTest {
 
     @Test
     void shouldRemoveNode_inTheMiddleOfList() {
-        Person firstPerson = new Person("A");
-        Person secondPerson = new Person("B");
-        Person thirdPerson = new Person("C");
-        marcinLinkedList.add(firstPerson);
-        marcinLinkedList.add(secondPerson);
-        marcinLinkedList.add(thirdPerson);
-
-        assertTrue(marcinLinkedList.remove(secondPerson));
+        String first = "A";
+        marcinLinkedList.add(first);
+        String second = "B";
+        marcinLinkedList.add(second);
+        String third = "B";
+        marcinLinkedList.add(third);
+        assertTrue(marcinLinkedList.remove(second));
 
         assertEquals(2,marcinLinkedList.size());
-        assertEquals(0,marcinLinkedList.indexOf(firstPerson));
-        assertEquals(1,marcinLinkedList.indexOf(thirdPerson));
+        assertEquals(0,marcinLinkedList.indexOf(first));
+        assertEquals(1,marcinLinkedList.indexOf(third));
     }
 
     @Test
     void shouldChangeHead_whenDeleteFirstElement() {
-        Person firstPerson = new Person("A");
-        Person secondPerson = new Person("B");
-        Person thirdPerson = new Person("C");
-        marcinLinkedList.add(firstPerson);
-        marcinLinkedList.add(secondPerson);
-        marcinLinkedList.add(thirdPerson);
+        String first = "A";
+        marcinLinkedList.add(first);
+        String second = "B";
+        marcinLinkedList.add(second);
+        String third = "B";
+        marcinLinkedList.add(third);
 
-        assertTrue(marcinLinkedList.remove(firstPerson));
-        assertEquals(secondPerson,marcinLinkedList.getHead());
+        assertTrue(marcinLinkedList.remove(first));
+        assertEquals(second,marcinLinkedList.getHead());
         assertEquals(2,marcinLinkedList.size());
-        assertEquals(0,marcinLinkedList.indexOf(secondPerson));
-        assertEquals(1,marcinLinkedList.indexOf(thirdPerson));
+        assertEquals(0,marcinLinkedList.indexOf(second));
     }
 
     @Test
     void shouldCleanList() {
-        Person firstPerson = new Person("A");
-        Person secondPerson = new Person("B");
-        Person thirdPerson = new Person("C");
-        marcinLinkedList.add(firstPerson);
-        marcinLinkedList.add(secondPerson);
-        marcinLinkedList.add(thirdPerson);
+        String first = "A";
+        marcinLinkedList.add(first);
+        String second = "B";
+        marcinLinkedList.add(second);
+        String third = "B";
+        marcinLinkedList.add(third);
 
         marcinLinkedList.clear();
 
@@ -126,31 +123,31 @@ class MarcinLinkedListImplTest {
 
     @Test
     void shouldReturnObjectOnSpecificIndex() {
-        Person firstPerson = new Person("A");
-        Person secondPerson = new Person("B");
-        Person thirdPerson = new Person("C");
-        marcinLinkedList.add(firstPerson);
-        marcinLinkedList.add(secondPerson);
-        marcinLinkedList.add(thirdPerson);
+        String first = "A";
+        marcinLinkedList.add(first);
+        String second = "B";
+        marcinLinkedList.add(second);
+        String third = "B";
+        marcinLinkedList.add(third);
 
 
-        Person found = marcinLinkedList.get(1);
-        assertEquals(secondPerson,found);
+        String found = marcinLinkedList.get(1);
+        assertEquals(second,found);
     }
 
     @Test
     void shouldRemoveObjectOnSPecificIndex() {
-        Person firstPerson = new Person("A");
-        Person secondPerson = new Person("B");
-        Person thirdPerson = new Person("C");
-        marcinLinkedList.add(firstPerson);
-        marcinLinkedList.add(secondPerson);
-        marcinLinkedList.add(thirdPerson);
+        String first = "A";
+        marcinLinkedList.add(first);
+        String second = "B";
+        marcinLinkedList.add(second);
+        String third = "B";
+        marcinLinkedList.add(third);
 
         marcinLinkedList.remove(1);
 
         assertEquals(2,marcinLinkedList.size());
-        assertEquals(firstPerson,marcinLinkedList.get(0));
-        assertEquals(thirdPerson,marcinLinkedList.get(1));
+        assertEquals(first,marcinLinkedList.get(0));
+        assertEquals(third,marcinLinkedList.get(1));
     }
 }

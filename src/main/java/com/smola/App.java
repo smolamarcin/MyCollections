@@ -1,28 +1,39 @@
 package com.smola;
 
-import com.smola.array.MarcinArrayListImpl;
+import com.smola.model.Employee;
 import com.smola.model.Person;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class App {
     public static void main(String[] args) {
-        MarcinList<Person> people = new MarcinArrayListImpl<>();
+        List<Person> people = new ArrayList<>();
         people.add(new Person("Marcin"));
         people.add(new Person("Artem"));
         people.add(new Person("Mateusz"));
         people.add(new Person("Asia"));
-        printList(people);
-        for (Person person : people) {
-            if (person.getName().equals("Artem")){
-                people.remove(person);
+//        printList(people);
+//        System.out.println(people.get(2));
+//        printList(people);
+//        System.out.println(people.get(2));
+        List<Integer> itns = new ArrayList<>();
+        itns.add(1);
+        itns.add(2);
+        itns.add(3);
+        itns.add(4);
+        itns.add(5);
+        itns.add(6);
+        printList(itns);
+        for (Integer itn : itns) {
+            if(itn % 2 == 0){
+                itns.removeIf(e->e == 2);
             }
         }
-        printList(people);
+        printList(itns);
+
     }
 
-    private static void printList(MarcinList<Person> list) {
-        list.forEach(System.out::println);
+    private static void printList(List<?> list) {
+        System.out.println(list);
     }
 }

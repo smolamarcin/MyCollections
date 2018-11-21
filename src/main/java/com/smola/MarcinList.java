@@ -1,6 +1,6 @@
 package com.smola;
 
-public interface MarcinList<E> extends MarcinCollections<E>,Iterable<E> {
+public interface MarcinList<E> extends MarcinCollections<E> {
     E remove(int index);
     E get(int index);
 

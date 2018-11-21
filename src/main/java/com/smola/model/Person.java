@@ -2,8 +2,8 @@ package com.smola.model;
 
 import java.util.Objects;
 
-public final class Person {
-    private final String name;
+public class Person implements Comparable<Person>{
+    private String name;
 
     public Person(String name) {
         this.name = name;
@@ -31,5 +31,14 @@ public final class Person {
         return "Person{" +
                 "name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Person p) {
+        return this.name.compareTo(p.name);
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
