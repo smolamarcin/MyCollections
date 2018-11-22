@@ -4,6 +4,7 @@ import com.smola.model.Employee;
 import com.smola.model.Person;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class App {
     public static void main(String[] args) {
@@ -30,6 +31,7 @@ public class App {
             }
         }
         printList(itns);
+        Map<Double, List<Person>> collect = people.stream().collect(Collectors.groupingBy(e -> e.getAge()));
 
     }
 
