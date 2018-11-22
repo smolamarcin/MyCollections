@@ -4,12 +4,11 @@ import com.smola.model.chapter5.Trader;
 import com.smola.model.chapter5.Transaction;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
 public class ChapterFive {
@@ -79,5 +78,13 @@ public class ChapterFive {
                 .reduce(0, Integer::min);
         System.out.println(min);
         System.out.println(max);
+        // create map with expensive and cheap transactions
+        Map<String, List<Transaction>> ex = transactions.stream().collect(groupingBy(e->isExpensive(e)));
+        System.out.println(ex);
     }
+
+    private String isExpensive(Transaction e) {
+        return e.getValue() > 500 ? "Expensive" : "Cheap";
+    }
+
 }
