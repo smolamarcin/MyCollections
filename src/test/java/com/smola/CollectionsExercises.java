@@ -95,6 +95,14 @@ public class CollectionsExercises {
 
     }
 
+    @Test
+    void breakingHashCOdeCOntract() {
+        Person personWoHashcode = new Person("Marcin");
+        Map<Person, String> myMap= new HashMap<>();
+        myMap.put(personWoHashcode,"Siemanko");
+        System.out.println(myMap.get(new Person("Marcin")));
+
+    }
 
 
 }
