@@ -60,6 +60,9 @@ public class CollectionsExercises {
         list.add(2,"E");
         list.add(2,"F");
         list.add(2,"G");
+        System.out.println(list);
+        list.remove(2);
+        System.out.println(list);
     }
 
     @Test
@@ -89,7 +92,10 @@ public class CollectionsExercises {
             e.charAt(0) == 'a').filter(e->e.length() == 3).collect(Collectors.toList());
         double v = siema.stream().mapToInt(e -> e.intValue()).average().orElse(-1);
         String s = set.stream().filter(e -> e.length() > 2).max(String::compareTo).get();
+
     }
+
+
 
 }
 
