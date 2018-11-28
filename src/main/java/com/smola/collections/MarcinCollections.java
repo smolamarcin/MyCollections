@@ -1,4 +1,4 @@
-package com.smola;
+package com.smola.collections;
 
 public interface MarcinCollections<E> extends Iterable<E> {
     int size();

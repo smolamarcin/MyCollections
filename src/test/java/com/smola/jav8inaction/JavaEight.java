@@ -5,6 +5,8 @@ import javafx.print.Collation;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.function.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -69,5 +71,7 @@ public class JavaEight {
 
         System.out.println(reduce.orElse(-1));
         System.out.println(integers.stream().max(Integer::compareTo).orElse(-1));
+
+        integers.stream().sorted().collect(Collectors.toList());
     }
 }

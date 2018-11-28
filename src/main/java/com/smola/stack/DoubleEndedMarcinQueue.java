@@ -1,8 +1,6 @@
 package com.smola.stack;
 
-import com.smola.MarcinCollections;
-
-import java.util.Collections;
+import com.smola.collections.MarcinCollections;
 
 public interface DoubleEndedMarcinQueue<E> extends MarcinCollections<E> {
     E poll();

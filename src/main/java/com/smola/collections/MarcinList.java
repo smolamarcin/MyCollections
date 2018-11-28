@@ -1,4 +1,4 @@
-package com.smola;
+package com.smola.collections;
 
 public interface MarcinList<E> extends MarcinCollections<E> {
     E remove(int index);

@@ -1,6 +1,6 @@
 package com.smola.linked;
 
-import com.smola.MarcinList;
+import com.smola.collections.MarcinList;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

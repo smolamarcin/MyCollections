@@ -1,13 +1,13 @@
-package com.smola;
+package com.smola.array;
 
-import com.smola.array.MarcinArrayListImpl;
+import com.smola.collections.MarcinList;
 import com.smola.model.Person;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MyListImplTest {
+public class MarcinArrayListImplTest {
     private MarcinArrayListImpl<Person> myList = new MarcinArrayListImpl<>();
 
     @Test
@@ -120,4 +120,6 @@ public class MyListImplTest {
             list.add(new Person(String.valueOf(i)));
         }
     }
+
+
 }
