@@ -2,6 +2,11 @@ package com.smola.alghoritms;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.function.BinaryOperator;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BinarySearchTest {
